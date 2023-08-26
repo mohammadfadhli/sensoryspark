@@ -26,7 +26,7 @@ onMounted(() => {
                     class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:border-gray-700">
                     <li>
                         <a href="#"
-                            class="block py-2 pl-3 pr-4 text-white bg-orange-500 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                            class="block py-2 pl-3 pr-4 text-orange-500 rounded md:bg-transparent md:text-orange-500 md:p-0"
                             aria-current="page">Home</a>
                     </li>
                     <li>
