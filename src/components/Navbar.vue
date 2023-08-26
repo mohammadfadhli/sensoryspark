@@ -1,15 +1,45 @@
 <script setup>
 import { onMounted } from 'vue'
 import { initFlowbite } from 'flowbite'
+// import { auth } from '../../firebaseConfig';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
 })
+
+// const getCurrentUser = () => {
+//     return new Promise((resolve, reject) => {
+//         const removeListener = onAuthStateChanged(
+//             auth,
+//             (user) => {
+//                 removeListener();
+//                 resolve(user);
+//             },
+//             reject
+//         )
+//     })
+// }
+
+let username = ""
+let email = ""
+const authorised = getAuth();
+const user = authorised.currentUser;
+if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    const displayName = user.displayName;
+    const emailName = user.email;
+    // console.log(displayName)
+    username = displayName
+    email = emailName
+}
+
 </script>
 
+
 <style>
-.bg-gold{
+.bg-gold {
     background-color: #D5CB6F;
 }
 </style>
@@ -28,7 +58,7 @@ onMounted(() => {
                     <span class="sr-only">Open user menu</span>
                     <img class="w-8 h-8 rounded-full" src="../assets/mascot.png" alt="user photo">
                     <span>
-                        <span class="w-full font-bold">Username</span>
+                        <span class="w-full font-bold">{{ username }}</span>
                         <br>
                         <span class="w-full">Student</span>
                     </span>
@@ -37,19 +67,10 @@ onMounted(() => {
                 <div class="z-50 hidden my-4 text-base list-none divide-y divide-gray-100 rounded-lg shadow"
                     id="user-dropdown">
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900">Username</span>
-                        <span class="block text-sm  text-gray-500 truncate">name@email.com</span>
+                        <span class="block text-sm text-gray-900">{{ username }}</span>
+                        <span class="block text-sm text-gray-500 truncate">{{ email }}</span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Earnings</a>
-                        </li>
                         <li>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
                                 out</a>
