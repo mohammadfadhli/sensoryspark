@@ -5,3 +5,25 @@
 body{
     background-color: #FFF2BF;
 }
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #FFF2BF;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #D5CB6F;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb:horizontal {
+    background: #FFF2BF;
+    border-radius: 5px;
+}
