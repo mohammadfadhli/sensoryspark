@@ -6,6 +6,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
 import Login from "./views/Login.vue";
 import TutorGPT from "./views/TutorGPT.vue";
+import './assets/main.css'
 
 const routes = [
     { 
