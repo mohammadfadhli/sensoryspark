@@ -1,8 +1,22 @@
 <script setup>
   import Navbar from './components/Navbar.vue';
-  import { useFirebaseStore } from './stores/firebasestore';
+  import { onMounted, ref } from 'vue';
+  import { auth } from '../firebaseConfig';
+  import { onAuthStateChanged } from 'firebase/auth';
 
-  const store=useFirebaseStore();
+  const isLoggedIn = ref(false);
+
+  onMounted(() => {
+    onAuthStateChanged(auth, (user) => {
+      if(user) {
+        isLoggedIn.value = true;
+      }
+      else
+      {
+        isLoggedIn.value = false;
+      }
+    })
+  })
 
 </script>
 
