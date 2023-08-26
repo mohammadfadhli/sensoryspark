@@ -10,15 +10,13 @@ module.exports = {
   theme: {
     colors: {
       black: "#27272D",
+      yellow: "#FFF584",
+      green: {
+        DEFAULT: "#D5CB6F",
+      },
       orange: {
         DEFAULT: "#F58B2E",
         25: "#FFF2BF",
-      },
-      yellow: {
-        DEFAULT: "#FFF584",
-      },
-      green: {
-        DEFAULT: "#D5CB6F",
       },
     },
     fontFamily: {

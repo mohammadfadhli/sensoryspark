@@ -64,13 +64,12 @@ export default {
 
 </template>
 
-<style>
+<style scoped>
 
     .card-face.is-front {
         background-color: red;
         color: white;
         
     }
-
 
 </style>
