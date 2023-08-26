@@ -71,9 +71,5 @@ export default {
         
     }
 
-    /* .card-face.is-back {
-        
-        color: white;
-    } */
 
 </style>
