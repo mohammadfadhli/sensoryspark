@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { defineStore } from "pinia";
 import constants from "@/assets/constants";
 import { useTimeStore } from "@/stores/useTimeStore";
@@ -63,38 +63,43 @@ export const useCardStore = defineStore("CardStore", () => {
     }, 10000);
   };
 
-  if (router.currentRoute.value.name === 'easy') {
-    cardsDeck.value = ["1", "2", "3", "4", "5", "6"];
-  }
-  else if (router.currentRoute.value.name === 'medium') {
-    cardsDeck.value = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-  }
-  else {
-    cardsDeck.value = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"];
-  }
+  const populateCardList = () => {
+    cardList.value = [];
 
-  cardsDeck.value.forEach(item => {
-    cardList.value.push({
-      value: item,
-      visible: true,
-      indexCard: null,
-      matched: false,
-      variant: 1,
+    cardsDeck.value.forEach(item => {
+      cardList.value.push({
+        value: item,
+        visible: true,
+        indexCard: null,
+        matched: false,
+        variant: 1,
+      });
+
+      cardList.value.push({
+        value: item,
+        visible: true,
+        indexCard: null,
+        matched: false,
+        variant: 2,
+      });
     });
 
-    cardList.value.push({
-      value: item,
-      visible: true,
-      indexCard: null,
-      matched: false,
-      variant: 2,
-    });
-  });
+    cardList.value = cardList.value.map((card, index) => ({
+      ...card,
+      indexCard: index,
+    }));
+  };
 
-  cardList.value = cardList.value.map((card, index) => ({
-    ...card,
-    indexCard: index,
-  }));
+  watch(() => router.currentRoute.value.name, (newRouteName) => {
+    if (newRouteName === 'easy') {
+      cardsDeck.value = ["1", "2", "3", "4", "5", "6"];
+    } else if (newRouteName === 'medium') {
+      cardsDeck.value = ["1", "2", "3", "4", "5", "6", "7", "8"];
+    } else {
+      cardsDeck.value = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+    }
+    populateCardList();
+  }, { immediate: true });
 
   return {
     cardsDeck,
