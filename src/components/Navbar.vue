@@ -12,17 +12,6 @@ onMounted(() => {
     initFlowbite();
 });
 
-// let username = "d"
-// let email = ""
-// const authorised = getAuth();
-// const user = authorised.currentUser;
-// if (user !== null) {
-//     // The user object has basic properties such as display name, email, etc.
-//     username = user.displayName;
-//     email = user.email;
-//     // console.log(displayName)
-// }
-
 const handleSignOut = () => {
     console.log("log out?");
     signOut(auth)
@@ -30,7 +19,7 @@ const handleSignOut = () => {
             // Sign-out successful.
             localStorage.removeItem("username");
             localStorage.removeItem("email");
-            window.location.href = "/"
+            window.location.href = "/";
         })
         .catch((error) => {
             // An error happened.
@@ -55,27 +44,30 @@ const handleSignOut = () => {
             <div class="flex items-center md:order-2">
                 <button
                     type="button"
-                    class="flex mr-3 text-sm bg-transparent rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
+                    class="flex mr-3 text-sm bg-transparent rounded-full md:mr-0 focus:ring-4 focus:ring-orange-25 px-4 py-1"
                     id="user-menu-button"
                     aria-expanded="false"
                     data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom"
                 >
                     <span class="sr-only">Open user menu</span>
-                    <img
-                        class="w-8 h-8 rounded-full"
-                        src="../assets/mascot.png"
-                        alt="user photo"
-                    />
-                    <span>
-                        <span class="w-full font-bold">{{ username }}</span>
-                        <br />
-                        <span class="w-full">Student</span>
-                    </span>
+
+                    <div class="grid grid-cols-2 gap-1">
+                        <img
+                            class="w-10 h-full mx-auto"
+                            src="../assets/user.png"
+                            alt="user photo"
+                        />
+                        <div>
+                            <h1 class="w-full font-bold text-start">{{ username }}</h1>
+                            <h1 class="text-start">Student</h1>
+                        </div>
+                    </div>
+
                 </button>
                 <!-- Dropdown menu -->
                 <div
-                    class="z-50 hidden my-4 text-base list-none divide-y divide-gray-100 rounded-lg shadow"
+                    class="z-50 hidden my-4 text-base list-none divide-y divide-[#D5CB6F] rounded-lg shadow"
                     id="user-dropdown"
                 >
                     <div class="px-4 py-3">
@@ -90,7 +82,7 @@ const handleSignOut = () => {
                         <li>
                             <button
                                 @click.prevent="handleSignOut"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:text-black"
                             >
                                 Sign out
                             </button>
@@ -132,21 +124,21 @@ const handleSignOut = () => {
                     <li>
                         <a
                             href="/puzzle"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0"
                             >Puzzles</a
                         >
                     </li>
                     <li>
                         <a
                             href="/tutorGPT"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0"
                             >TutorGPT</a
                         >
                     </li>
                     <li>
                         <a
                             href="/parentsForum"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0"
                             >Parents' Forum</a
                         >
                     </li>

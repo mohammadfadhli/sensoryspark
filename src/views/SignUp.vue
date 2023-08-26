@@ -50,10 +50,10 @@ export default {
                 <h1>Learning Made Easy</h1>
                 <h1>with <a class="text-5xl text-orange">SensorySpark</a></h1>
                 <img
-                    src="../assets/mascot.png"
-                    height="300"
-                    width="300"
-                    class="ms-14 mt-5"
+                    src="../assets/bgimage.png"
+                    height="500"
+                    width="800"
+                    class="mt-11"
                 />
             </div>
             <div>
