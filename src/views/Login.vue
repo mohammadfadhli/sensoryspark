@@ -56,7 +56,7 @@ export default {
                             <label
                                 for="username"
                                 class="text-2xl font-bold ms-3"
-                                >Username/Email</label
+                                >Email</label
                             ><br />
                             <input
                                 type="text"
