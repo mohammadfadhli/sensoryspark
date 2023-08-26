@@ -1,4 +1,5 @@
 <script>
+    import { RouterLink, RouterView } from 'vue-router';
     export default{
         data(){
             return {
@@ -37,7 +38,7 @@
                                 id="username"
                                 name="username"
                                 v-model="username"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none focus:ring-0"
                             />
                         </div>
 
@@ -48,7 +49,7 @@
                                 id="password"
                                 name="password"
                                 v-model="password"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none focus:ring-0"
                             />
                         </div>
 
@@ -63,7 +64,7 @@
                             
                             <div class="mx-auto">
                             <div class="py-3">
-                                <a href="/" class="underline text-orange w-full text-xl font-bold">Sign up</a>
+                                <RouterLink to="/signup" class="underline text-orange w-full text-xl font-bold">Sign up</RouterLink>
                             </div>
                             </div>
                         </div>                    
