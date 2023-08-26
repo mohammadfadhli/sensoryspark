@@ -65,7 +65,7 @@ export default {
                                 id="username"
                                 name="username"
                                 v-model="username"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
                             <h1 class="ms-3 mt-2">provide a unique username</h1>
                         </div>
@@ -79,7 +79,7 @@ export default {
                                 id="email"
                                 name="email"
                                 v-model="email"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
                         </div>
 
@@ -94,7 +94,7 @@ export default {
                                 id="password"
                                 name="password"
                                 v-model="password"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
                             <div class="ms-3 mt-2">
                                 <h1>
