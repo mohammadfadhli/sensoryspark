@@ -18,9 +18,26 @@ const routes = [
         component: () => import("./views/SignUp.vue") 
     },
     {
-        path: "/puzzle",
-        name: "puzzle",
-        component: () => import("./views/Puzzle.vue")
+        path: '/puzzle',
+        name: 'puzzle',
+        component: () => import('./views/Puzzle.vue'),
+        children: [
+          {
+            path: 'easy',
+            name: 'easy',
+            component: () => import('./components/puzzle/Easy.vue')
+          },
+          {
+            path: 'medium',
+            name: 'medium',
+            component: () => import('./components/puzzle/Medium.vue')
+          },
+          {
+            path: 'hard',
+            name: 'hard',
+            component: () => import('./components/puzzle/Hard.vue')
+          }
+        ]
     },
     { 
         path: "/tutorgpt", 

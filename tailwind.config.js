@@ -14,8 +14,12 @@ module.exports = {
         DEFAULT: "#F58B2E",
         25: "#FFF2BF",
       },
-      yellow: "#FFF584",
-      green: "#D5CB6F",
+      yellow: {
+        DEFAULT: "#FFF584",
+      },
+      green: {
+        DEFAULT: "#D5CB6F",
+      },
     },
     fontFamily: {
       mono: ["Consolas"],
