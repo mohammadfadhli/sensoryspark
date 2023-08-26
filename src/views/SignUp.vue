@@ -1,11 +1,12 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import { auth } from "../../firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default {
     data() {
         return {
+            username: "",
             email: "",
             password: "",
         };
@@ -20,7 +21,10 @@ export default {
                 .then((userCredential) => {
                     // Signed in
                     const user = userCredential.user;
-                    this.$router.push("/puzzle") 
+                    updateProfile(auth.currentUser, {
+                        displayName: this.username,
+                    });
+                    this.$router.push("/puzzle");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -58,6 +62,7 @@ export default {
                                 type="text"
                                 id="username"
                                 name="username"
+                                v-model="username"
                                 class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
                         </div>
