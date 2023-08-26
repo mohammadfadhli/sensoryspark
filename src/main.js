@@ -6,6 +6,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
 import Login from "./views/Login.vue";
 import TutorGPT from "./views/TutorGPT.vue";
+import parentsForum from "./views/parentsForum.vue";
 import './assets/main.css'
 
 const routes = [
@@ -18,6 +19,11 @@ const routes = [
         path: "/tutorgpt", 
         name: "tutorgpt",
         component: TutorGPT 
+    },
+    {
+        path: "/parentsforum",
+        name: "parentsforum",
+        component: parentsForum
     },
 ];
 
