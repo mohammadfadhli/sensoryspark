@@ -11,12 +11,12 @@ import './assets/main.css'
 const routes = [
     { 
         path: "/login", 
-        name: "Login",
+        name: "login",
         component: Login 
     },
     { 
         path: "/tutorgpt", 
-        name: "TutorGPT",
+        name: "tutorgpt",
         component: TutorGPT 
     },
 ];
