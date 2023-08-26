@@ -8,7 +8,7 @@ import './assets/main.css'
 
 const routes = [
     { 
-        path: "/login", 
+        path: "/", 
         name: "login",
         component: () => import("./views/Login.vue")
     },
