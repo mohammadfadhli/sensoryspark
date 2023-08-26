@@ -15,7 +15,6 @@ cardstore.restartGame();
 
 <template>
 <div>
-    {{cardstore.Gamestatus}}
     <WinModal v-if="cardstore.remainingPairs == 0"/>
 </div>
 </template>
