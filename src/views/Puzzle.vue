@@ -1,4 +1,10 @@
+<script setup>
+import { ref } from "vue";
+import Time from "@/components/Time.vue";
+import { useTimeStore } from "@/stores/useTimeStore";
 
+const store = useTimeStore();
+</script>
 
 <template>
     <h1 class="font-bold text-5xl text-orange text-center my-5">Puzzle</h1>
