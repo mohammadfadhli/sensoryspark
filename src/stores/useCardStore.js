@@ -100,7 +100,9 @@ export const useCardStore = () => {
 
       userSelection.value.length = 0;
     }
-  });
+  },
+  {deep: true}
+  );
 
   return {
     cardList,
