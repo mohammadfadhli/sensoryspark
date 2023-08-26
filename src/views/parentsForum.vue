@@ -7,7 +7,7 @@ export default{
     data(){
         return {
             newMessage: '',
-            category: ['test', 'homework']
+            category: 'General'
             
         };
     },
@@ -28,32 +28,35 @@ export default{
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
-            
+
+            this.newMessage = '';
+            this.category = 'General';
         }   
     }
 }
 </script>
 
 <template>
-    <div class="grid place-items-center mt-5">
-        <form @submit.prevent="sendMessage">
-            <div>
-                <input v-model="newMessage" type="text" placeholder="Share your thoughts" />
+    
+    <div class="container max-w-[1024px] mx-auto p-4">
+        <h1 class="text-2xl font-semibold mb-4">Forum</h1>
+        
+        <!-- Create a form for adding new posts -->
+        <form @submit.prevent="submitMessage" class="mb-4">
+            <div class="mb-2">
+                <!-- <label for="postText" class="block font-medium">Post Content:</label> -->
+                <textarea v-model="newMessage" id="postText" placeholder="Share your thoughts!" class="mt-2 border-dashed border-2 border-orange rounded w-full p-2 px-5 bg-orange-25 focus:outline-none focus:ring-0 bg-white"></textarea>
             </div>
-            <div>
-                <!-- multi dropdown to select category -->
-                <select v-model="category" multiple size="1">
+            <div class="mb-2">
+                <label for="postCategory" class="block font-medium">Category:</label>
+                <select v-model="category" id="postCategory" class="w-full p-2 px-5 border-dashed border-2 border-orange rounded">
                     <option value="General">General</option>
                     <option value="Childcare">Childcare</option>
                     <option value="Homework">Homework</option> 
                     <option value="Parenting">Parenting Tips</option>
                 </select>
-                <button type="submit" @click="submitMessage">Send</button>
             </div>
-            <div>
-            </div>
+            <button type="submit" class="bg-orange rounded-full px-5 py-3 font-bold my-2">Submit</button>
         </form>
     </div>
-    
-    
 </template>
