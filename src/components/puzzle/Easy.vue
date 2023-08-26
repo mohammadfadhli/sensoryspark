@@ -4,7 +4,9 @@ import { useTimeStore } from "@/stores/useTimeStore";
 
 const store = useTimeStore();
 
-store.startStatus = constants.TIMER_START;
+store.easyStartStatus = constants.TIMER_START;
+store.mediumStartStatus = constants.TIMER_RESET;
+store.hardStartStatus = constants.TIMER_RESET;
 </script>
 
 <template>
