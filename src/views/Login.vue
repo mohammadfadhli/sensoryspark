@@ -36,7 +36,7 @@ export default {
 
 <template>
     <div class="container max-w-[1024px] mx-auto p-3 mt-20">
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="font-bold text-3xl">
                 <h1>Learning Made Easy</h1>
                 <h1>with <a class="text-5xl text-orange">SensorySpark</a></h1>
