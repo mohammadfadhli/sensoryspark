@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import Time from "@/components/Time.vue";
-import Card from "../components/Card.vue";
+import Card from "@/components/Card.vue";
 import { useTimeStore } from "@/stores/useTimeStore";
 import { useCardStore } from "@/stores/useCardStore";
 
@@ -17,7 +17,7 @@ const flipCard = payload => {
     if (cardstore.userSelection[0]) {
       if (
         cardstore.userSelection[0].indexCard === payload.indexCard &&
-        cardstore.userSelection[0].indexCard === payload.faceValue
+        cardstore.userSelection[0].faceValue === payload.faceValue
       ) {
         return;
       } else {
@@ -105,6 +105,7 @@ watch(
                     @select-card="flipCard"/>
             </transition-group>
             <router-view/>
+          
         </div>
     </div>
 

@@ -3,6 +3,8 @@ import { defineStore } from "pinia";
 import constants from "@/assets/constants";
 import { useTimeStore } from "@/stores/useTimeStore";
 import { useRouter } from 'vue-router';
+import cardsOnDeck from '@/assets/cardsDeck.json';
+
 
 export const useCardStore = defineStore("CardStore", () => {
 
@@ -12,7 +14,6 @@ export const useCardStore = defineStore("CardStore", () => {
   const winModal = ref(false);
   const userCanFlipCard = ref(false);
   const isStart = ref(false);
-  const cardsDeck = ref([]);
 
   const router = useRouter();
   const store = useTimeStore();
@@ -90,13 +91,16 @@ export const useCardStore = defineStore("CardStore", () => {
     }));
   };
 
+
+  const cardsDeck = cardsOnDeck;
+
   watch(() => router.currentRoute.value.name, (newRouteName) => {
     if (newRouteName === 'easy') {
-      cardsDeck.value = ["1", "2", "3", "4", "5", "6"];
+      cardsDeck.value = cardsOnDeck.slice(0,6);
     } else if (newRouteName === 'medium') {
-      cardsDeck.value = ["1", "2", "3", "4", "5", "6", "7", "8"];
+      cardsDeck.value = cardsOnDeck.slice(0,8);
     } else {
-      cardsDeck.value = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+      cardsDeck.value = cardsOnDeck.slice(0,12);
     }
     populateCardList();
   }, { immediate: true });
