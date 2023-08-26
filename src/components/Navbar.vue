@@ -2,25 +2,13 @@
 import { onMounted } from 'vue'
 import { initFlowbite } from 'flowbite'
 // import { auth } from '../../firebaseConfig';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth} from "firebase/auth";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
 })
 
-// const getCurrentUser = () => {
-//     return new Promise((resolve, reject) => {
-//         const removeListener = onAuthStateChanged(
-//             auth,
-//             (user) => {
-//                 removeListener();
-//                 resolve(user);
-//             },
-//             reject
-//         )
-//     })
-// }
 
 let username = ""
 let email = ""
@@ -28,11 +16,9 @@ const authorised = getAuth();
 const user = authorised.currentUser;
 if (user !== null) {
     // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
-    const emailName = user.email;
+    username = user.displayName;
+    email = user.email;
     // console.log(displayName)
-    username = displayName
-    email = emailName
 }
 
 </script>
