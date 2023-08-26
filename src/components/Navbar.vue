@@ -1,94 +1,154 @@
 <script setup>
-import { onMounted } from 'vue'
-import { initFlowbite } from 'flowbite'
-// import { auth } from '../../firebaseConfig';
-import { getAuth} from "firebase/auth";
+import { onMounted, ref } from "vue";
+import { initFlowbite } from "flowbite";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
-// initialize components based on data attribute selectors
+const isLoggedIn = ref("");
+const username = ref(localStorage.getItem("username"));
+const email = ref(localStorage.getItem("email"));
+
 onMounted(() => {
     initFlowbite();
-})
+});
 
+// let username = "d"
+// let email = ""
+// const authorised = getAuth();
+// const user = authorised.currentUser;
+// if (user !== null) {
+//     // The user object has basic properties such as display name, email, etc.
+//     username = user.displayName;
+//     email = user.email;
+//     // console.log(displayName)
+// }
 
-let username = ""
-let email = ""
-const authorised = getAuth();
-const user = authorised.currentUser;
-if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    username = user.displayName;
-    email = user.email;
-    // console.log(displayName)
-}
-
+const handleSignOut = () => {
+    console.log("log out?");
+    signOut(auth)
+        .then(() => {
+            // Sign-out successful.
+            localStorage.removeItem("username");
+            localStorage.removeItem("email");
+            window.location.href = "/"
+        })
+        .catch((error) => {
+            // An error happened.
+        });
+};
 </script>
-
 
 <style>
 .bg-gold {
-    background-color: #D5CB6F;
+    background-color: #d5cb6f;
 }
 </style>
 
 <template>
     <nav class="bg-gold border-gray-200">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div
+            class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        >
             <!-- <a href="#" class="flex items-center">
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SensorySpark</span>
             </a> -->
             <div class="flex items-center md:order-2">
-                <button type="button"
+                <button
+                    type="button"
                     class="flex mr-3 text-sm bg-transparent rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
-                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
-                    data-dropdown-placement="bottom">
+                    id="user-menu-button"
+                    aria-expanded="false"
+                    data-dropdown-toggle="user-dropdown"
+                    data-dropdown-placement="bottom"
+                >
                     <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full" src="../assets/mascot.png" alt="user photo">
+                    <img
+                        class="w-8 h-8 rounded-full"
+                        src="../assets/mascot.png"
+                        alt="user photo"
+                    />
                     <span>
                         <span class="w-full font-bold">{{ username }}</span>
-                        <br>
+                        <br />
                         <span class="w-full">Student</span>
                     </span>
                 </button>
                 <!-- Dropdown menu -->
-                <div class="z-50 hidden my-4 text-base list-none divide-y divide-gray-100 rounded-lg shadow"
-                    id="user-dropdown">
+                <div
+                    class="z-50 hidden my-4 text-base list-none divide-y divide-gray-100 rounded-lg shadow"
+                    id="user-dropdown"
+                >
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900">{{ username }}</span>
-                        <span class="block text-sm text-gray-500 truncate">{{ email }}</span>
+                        <span class="block text-sm text-gray-900">{{
+                            username
+                        }}</span>
+                        <span class="block text-sm text-gray-500 truncate">{{
+                            email
+                        }}</span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
-                                out</a>
+                            <button
+                                @click.prevent="handleSignOut"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                                Sign out
+                            </button>
                         </li>
                     </ul>
                 </div>
-                <button data-collapse-toggle="navbar-user" type="button"
+                <button
+                    data-collapse-toggle="navbar-user"
+                    type="button"
                     class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                    aria-controls="navbar-user" aria-expanded="false">
+                    aria-controls="navbar-user"
+                    aria-expanded="false"
+                >
                     <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h15M1 7h15M1 13h15" />
+                    <svg
+                        class="w-5 h-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 17 14"
+                    >
+                        <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15"
+                        />
                     </svg>
                 </button>
             </div>
-            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+            <div
+                class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+                id="navbar-user"
+            >
                 <ul
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0"
+                >
                     <li>
-                        <a href="/puzzle"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Puzzles</a>
+                        <a
+                            href="/puzzle"
+                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                            >Puzzles</a
+                        >
                     </li>
                     <li>
-                        <a href="/tutorGPT"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">TutorGPT</a>
+                        <a
+                            href="/tutorGPT"
+                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                            >TutorGPT</a
+                        >
                     </li>
                     <li>
-                        <a href="/parentsForum"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Parents'
-                            Forum</a>
+                        <a
+                            href="/parentsForum"
+                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                            >Parents' Forum</a
+                        >
                     </li>
                 </ul>
             </div>

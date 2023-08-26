@@ -19,6 +19,8 @@ export default {
                     // Signed in
                     const user = userCredential.user;
                     console.log(user);
+                    localStorage.setItem("username", user.displayName);
+                    localStorage.setItem("email", this.email);
                     this.$router.push("/puzzle") // redirect to puzzle
                     // ...
                 })

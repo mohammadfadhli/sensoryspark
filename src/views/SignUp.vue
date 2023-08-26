@@ -18,14 +18,19 @@ export default {
             console.log(this.username);
             console.log(this.password);
             console.log("login clicked");
+
             createUserWithEmailAndPassword(auth, this.email, this.password)
-                .then((userCredential) => {
-                    // Signed in
-                    const user = userCredential.user;
-                    updateProfile(auth.currentUser, {
-                        displayName: this.username,
-                    });
-                    this.$router.push("/puzzle");
+                    .then((userCredential) => {
+                        // Signed in
+                        const user = userCredential.user;
+                        console.log(user)
+                        updateProfile(auth.currentUser, {
+                            displayName: this.username,
+                        });
+                        // this.$router.push("/puzzle");
+                        localStorage.setItem("username", this.username);
+                        localStorage.setItem("email", this.email);
+                        window.location.href = "/puzzle"
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -97,9 +102,7 @@ export default {
                                 class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
                             <div class="ms-3 mt-2">
-                                <h1>
-                                    must be at least 8 characters;
-                                </h1>
+                                <h1>must be at least 8 characters;</h1>
                                 <h1>
                                     must contain uppercase letters, special
                                     characters and
