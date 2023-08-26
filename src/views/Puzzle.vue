@@ -32,7 +32,7 @@ const store = useTimeStore();
         </div>
     </div>
     <div class="border border-green rounded-sm p-2">
-        <Time :startStatus="store.startStatus" />
+        <Time :startStatus="$route.name === 'easy' ? store.easyStartStatus : $route.name === 'medium' ? store.mediumStartStatus : store.hardStartStatus" />
         <router-view/>
     </div>
 
