@@ -56,6 +56,7 @@ export default {
         </div>
 
         <div v-else class="bg-green w-full h-full rounded-lg ">
+            {{ value }}
             <img src="../assets/backcard.png">
         </div>
 
