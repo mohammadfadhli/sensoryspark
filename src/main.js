@@ -30,7 +30,7 @@ const routes = [
     {
         path: "/parentsforum",
         name: "parentsforum",
-        component: () => import("./views/parentsForum.vue.vue")
+        component: () => import("./views/parentsForum.vue")
     },
 ];
 
