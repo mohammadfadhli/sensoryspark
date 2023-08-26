@@ -8,14 +8,12 @@ export default {
         return {
             email: "",
             password: "",
+            error: ""
         };
     },
     methods: {
         onSubmit(e) {
             // e.preventDefault();
-            console.log(this.username);
-            console.log(this.password);
-            console.log("login clicked");
             signInWithEmailAndPassword(auth, this.email, this.password)
                 .then((userCredential) => {
                     // Signed in
@@ -27,6 +25,7 @@ export default {
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    this.error = errorMessage;
                     console.log(error);
                 });
         },
@@ -80,6 +79,8 @@ export default {
                                 class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none focus:ring-0"
                             />
                         </div>
+
+                        <h1 v-if="error" class="text-red-600 font-bold mt-3 text-center">{{ error }}</h1>
 
                         <div class="mt-14 grid grid-cols-2">
                             <div>

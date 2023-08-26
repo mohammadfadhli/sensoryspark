@@ -9,6 +9,7 @@ export default {
             username: "",
             email: "",
             password: "",
+            error: "",
         };
     },
     methods: {
@@ -29,6 +30,7 @@ export default {
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    this.error = errorMessage;
                     // ..
                 });
         },
@@ -63,14 +65,13 @@ export default {
                                 id="username"
                                 name="username"
                                 v-model="username"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
+                            <h1 class="ms-3 mt-2">provide a unique username</h1>
                         </div>
 
                         <div class="mt-5">
-                            <label
-                                for="password"
-                                class="text-2xl font-bold ms-3"
+                            <label for="email" class="text-2xl font-bold ms-3"
                                 >Email</label
                             ><br />
                             <input
@@ -78,7 +79,7 @@ export default {
                                 id="email"
                                 name="email"
                                 v-model="email"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
                         </div>
 
@@ -93,9 +94,26 @@ export default {
                                 id="password"
                                 name="password"
                                 v-model="password"
-                                class="border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
+                                class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
+                            <div class="ms-3 mt-2">
+                                <h1>
+                                    must be at least 8 characters;
+                                </h1>
+                                <h1>
+                                    must contain uppercase letters, special
+                                    characters and
+                                </h1>
+                                <h1>numbers</h1>
+                            </div>
                         </div>
+
+                        <h1
+                            v-if="error"
+                            class="text-red-600 font-bold mt-3 text-center"
+                        >
+                            {{ error }}
+                        </h1>
 
                         <div class="mt-14 grid grid-cols-2">
                             <div>
