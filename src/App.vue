@@ -3,6 +3,7 @@
 </script>
 
 <template>
-  <Navbar v-if="$route.name!=='Login'"/>
+  <Navbar v-if="['Login', 'SignUp'].includes(!$route.name)"/>
+  
   <RouterView />
 </template>
