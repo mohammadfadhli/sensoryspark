@@ -8,10 +8,10 @@ import { useCardStore } from "@/stores/useCardStore";
 const store = useTimeStore();
 const cardstore = useCardStore();
 
-const userCanFlipCard = ref(true);
+const isActive = ref(false);
 
 const flipCard = payload => {
-  if (userCanFlipCard.value) {
+  if (cardstore.userCanFlipCard) {
     cardstore.cardList[payload.indexCard].visible = true;
 
     if (cardstore.userSelection[0]) {
@@ -38,18 +38,18 @@ watch(
       const cardOne = currentValue[0];
       const cardTwo = currentValue[1];
       // Disable ability to flip cards
-      userCanFlipCard.value = false;
+      cardstore.userCanFlipCard = false;
 
       if (cardOne.faceValue === cardTwo.faceValue) {
         cardstore.cardList[cardOne.indexCard].matched = true;
         cardstore.cardList[cardTwo.indexCard].matched = true;
-        userCanFlipCard.value = true;
+        cardstore.userCanFlipCard = true;
       } else {
         setTimeout(() => {
             cardstore.cardList[cardOne.indexCard].visible = false;
             cardstore.cardList[cardTwo.indexCard].visible = false;
           // Allow user to flip a new card
-          userCanFlipCard.value = true;
+          cardstore.userCanFlipCard = true;
         }, 2000);
       }
 
@@ -58,14 +58,11 @@ watch(
   },
   { deep: true }
 );
-
 </script>
 
 <template>
     <div>
         <h1 class="font-bold text-5xl text-orange text-center my-5">Puzzle</h1>
-        <p>Remaining pairs: {{ cardstore.remainingPairs }}</p>
-        <button @click="cardstore.restartGame">restart Game</button>
         <div class="flex">
             <div
                 class="bg-yellow px-5 py-1 hover:bg-green rounded-md border border-green w-auto flex items-center justify-center"
@@ -87,18 +84,26 @@ watch(
             </div>
         </div>
         <div class="border border-green rounded-sm p-2">
-            <Time :startStatus="$route.name === 'easy' ? store.easyStartStatus : $route.name === 'medium' ? store.mediumStartStatus : store.hardStartStatus" />
-                <transition-group tag="section" name="shuffle-card"
-                    class="game-board grid grid-rows-4 grid-flow-col justify-center gap-4"
-                >
-                    <Card v-for="card of cardstore.cardList"
-                        :key = "`${card.value}-${card.variant}`"
-                        :value = "card.value"
-                        :visible = "card.visible"
-                        :indexCard = "card.indexCard"
-                        :matched = "card.matched"
-                        @select-card="flipCard"/>
-                </transition-group>
+            <p>{{cardstore.Gamestatus}}</p>
+            <button 
+                class="mt-4 bg-orange text-white hover:bg-white hover:text-orange hover:border hover:border-orange px-4 py-2 rounded" 
+                @click="cardstore.restartGame"
+            >
+                Reshuffle
+            </button>
+            <Time v-show="cardstore.isStart" class="mb-5" :startStatus="$route.name === 'easy' ? store.easyStartStatus : $route.name === 'medium' ? store.mediumStartStatus : store.hardStartStatus" />
+            <h2 v-show="!cardstore.isStart" class="flex text-2xl mb-5 roboto-mono justify-center content-center">Memorise as much as you can!</h2>
+            <transition-group tag="section" name="shuffle-card"
+                class="game-board grid grid-rows-4 grid-flow-col justify-center gap-4"
+            >
+                <Card v-for="card of cardstore.cardList"
+                    :key = "`${card.value}-${card.variant}`"
+                    :value = "card.value"
+                    :visible = "card.visible"
+                    :indexCard = "card.indexCard"
+                    :matched = "card.matched"
+                    @select-card="flipCard"/>
+            </transition-group>
             <router-view/>
         </div>
     </div>
