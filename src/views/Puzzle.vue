@@ -1,4 +1,5 @@
 <script setup>
+import { ref, watch } from "vue";
 import Time from "@/components/Time.vue";
 import Card from "../components/Card.vue";
 import { useTimeStore } from "@/stores/useTimeStore";
@@ -7,11 +8,56 @@ import { useCardStore } from "@/stores/useCardStore";
 const store = useTimeStore();
 const cardstore = useCardStore();
 
-console.log(cardstore.cardList)
+const userCanFlipCard = ref(true);
 
-for (const card of cardstore.cardList.value) {
-    console.log(card)
-}
+const flipCard = payload => {
+  if (userCanFlipCard.value) {
+    cardstore.cardList[payload.indexCard].visible = true;
+
+    if (cardstore.userSelection[0]) {
+      if (
+        cardstore.userSelection[0].indexCard === payload.indexCard &&
+        cardstore.userSelection[0].indexCard === payload.faceValue
+      ) {
+        return;
+      } else {
+        cardstore.userSelection[1] = payload;
+      }
+    } else {
+        cardstore.userSelection[0] = payload;
+    }
+  } else {
+    return;
+  }
+};
+
+watch(
+    cardstore.userSelection,
+  currentValue => {
+    if (currentValue.length === 2) {
+      const cardOne = currentValue[0];
+      const cardTwo = currentValue[1];
+      // Disable ability to flip cards
+      userCanFlipCard.value = false;
+
+      if (cardOne.faceValue === cardTwo.faceValue) {
+        cardstore.cardList[cardOne.indexCard].matched = true;
+        cardstore.cardList[cardTwo.indexCard].matched = true;
+        userCanFlipCard.value = true;
+      } else {
+        setTimeout(() => {
+            cardstore.cardList[cardOne.indexCard].visible = false;
+            cardstore.cardList[cardTwo.indexCard].visible = false;
+          // Allow user to flip a new card
+          userCanFlipCard.value = true;
+        }, 2000);
+      }
+
+      cardstore.userSelection.length = 0;
+    }
+  },
+  { deep: true }
+);
 
 </script>
 
@@ -45,18 +91,17 @@ for (const card of cardstore.cardList.value) {
                 <transition-group tag="section" name="shuffle-card"
                     class="game-board grid grid-rows-4 grid-flow-col justify-center gap-4"
                 >
-                    <Card v-for="card of cardstore.cardList.value"
+                    <Card v-for="card of cardstore.cardList"
                         :key = "`${card.value}-${card.variant}`"
                         :value = "card.value"
                         :visible = "card.visible"
                         :indexCard = "card.indexCard"
                         :matched = "card.matched"
-                        @select-card="cardstore.flipCard"/>
+                        @select-card="flipCard"/>
                 </transition-group>
             <router-view/>
         </div>
     </div>
-
 
 </template>
 

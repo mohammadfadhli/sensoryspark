@@ -1,7 +1,9 @@
-import { ref, computed, watch } from 'vue';
+import { ref, computed } from 'vue';
+import { defineStore } from "pinia";
 
 
-export const useCardStore = () => {
+export const useCardStore = defineStore("CardStore", () => {
+
   const cardList = ref([]);
   const userSelection = ref([]);
   const newPlayer = ref(true);
@@ -62,51 +64,8 @@ export const useCardStore = () => {
     indexCard: index,
   }));
 
-  const flipCard = payload => {
-    const hasCardsOpenedThatNotMatch = cardList.value.filter(
-      item => item.matched === false && item.visible === true
-    );
-
-    if (
-      hasCardsOpenedThatNotMatch.length <= 1 &&
-      !cardList.value[payload.indexCard].visible
-    ) {
-      cardList.value[payload.indexCard].visible = true;
-
-      if (userSelection.value[0]) {
-        if (userSelection.value[0].indexCard !== payload.indexCard) {
-          userSelection.value[1] = payload;
-        }
-      } else {
-        userSelection.value[0] = payload;
-      }
-    }
-  };
-
-  watch(userSelection, currentValue => {
-    if (currentValue.length === 2) {
-      const firstCard = currentValue[0];
-      const secondCard = currentValue[1];
-
-      if (firstCard.value === secondCard.value) {
-        cardList.value[firstCard.indexCard].matched = true;
-        cardList.value[secondCard.indexCard].matched = true;
-      } else {
-        setTimeout(() => {
-          cardList.value[firstCard.indexCard].visible = false;
-          cardList.value[secondCard.indexCard].visible = false;
-        }, 2000);
-      }
-
-      userSelection.value.length = 0;
-    }
-  },
-  {deep: true}
-  );
-
   return {
     cardList,
-    flipCard,
     userSelection,
     Gamestatus,
     shuffleCards,
@@ -114,4 +73,4 @@ export const useCardStore = () => {
     remainingPairs,
     startGame,
   };
-};
+});
