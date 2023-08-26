@@ -15,7 +15,7 @@ const routes = [
         component: Login 
     },
     { 
-        path: "/tutorGPT", 
+        path: "/tutorgpt", 
         name: "TutorGPT",
         component: TutorGPT 
     },
