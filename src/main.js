@@ -4,32 +4,33 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
-import Login from "./views/Login.vue";
-import SignUp from "./views/SignUp.vue";
-import TutorGPT from "./views/TutorGPT.vue";
-import parentsForum from "./views/parentsForum.vue";
 import './assets/main.css'
 
 const routes = [
     { 
         path: "/login", 
         name: "login",
-        component: Login 
+        component: () => import("./views/Login.vue")
     },
     { 
         path: "/signUp", 
         name: "signUp",
-        component: SignUp 
+        component: () => import("./views/SignUp.vue") 
+    },
+    {
+        path: "/puzzle",
+        name: "puzzle",
+        component: () => import("./views/Puzzle.vue")
     },
     { 
         path: "/tutorgpt", 
         name: "tutorgpt",
-        component: TutorGPT 
+        component: () => import("./views/TutorGPT.vue")  
     },
     {
         path: "/parentsforum",
         name: "parentsforum",
-        component: parentsForum
+        component: () => import("./views/parentsForum.vue.vue")
     },
 ];
 
