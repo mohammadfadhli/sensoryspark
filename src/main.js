@@ -1,24 +1,34 @@
-import './assets/main.css'
+import "./assets/main.css";
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import { createRouter, createWebHistory } from 'vue-router'
-import App from './App.vue'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
+import { createRouter, createWebHistory } from "vue-router";
+import App from "./App.vue";
 import Login from "./views/Login.vue";
+import TutorGPT from "./views/TutorGPT.vue";
 
 const routes = [
-    {path: "/login", component: Login}
-]
+    { 
+        path: "/login", 
+        name: "Login",
+        component: Login 
+    },
+    { 
+        path: "/chat", 
+        name: "Chat",
+        component: TutorGPT 
+    },
+];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
-})
+    routes,
+});
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
+app.use(createPinia());
 
-app.use(router)
+app.use(router);
 
-app.mount('#app')
+app.mount("#app");
