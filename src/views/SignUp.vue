@@ -6,8 +6,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 export default {
     data() {
         return {
-            email: "username",
-            password: "password",
+            email: "",
+            password: "",
         };
     },
     methods: {
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-    <div class="container mx-auto mt-20">
+    <div class="container max-w-[1024px] mx-auto p-3 mt-20">
         <div class="grid grid-cols-2 gap-4">
             <div class="font-bold text-3xl">
                 <h1>Learning Made Easy</h1>
@@ -104,10 +104,15 @@ export default {
 
                             <div class="mx-auto">
                                 <div class="py-3">
-                                    <a
+                                    <!-- <a
                                         href="/"
                                         class="underline text-orange w-full text-xl font-bold"
                                         >Login</a
+                                    > -->
+                                    <RouterLink
+                                        to="/"
+                                        class="underline text-orange w-full text-xl font-bold"
+                                        >Login</RouterLink
                                     >
                                 </div>
                             </div>
