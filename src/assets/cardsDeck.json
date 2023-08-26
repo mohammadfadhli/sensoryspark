@@ -1,11 +1,15 @@
 [ 
     "circle",
-    "cone",
-    "cylinder",
-    "donut",
+    "decagon",
+    "heptagon",
     "hexagon",
+    "nonagon",
+    "octagon",
     "pentagon",
+    "rhombus",
+    "triangle",
+    "semicircle",
     "square",
-    "star",
+    "trapezium",
     "triangle"
 ]
