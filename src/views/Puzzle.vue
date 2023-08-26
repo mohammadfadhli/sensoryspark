@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from "vue";
+import Time from "@/components/Time.vue";
+import { useTimeStore } from "@/stores/useTimeStore";
+
+const store = useTimeStore();
 </script>
 
 <template>
@@ -24,6 +28,7 @@ import { ref } from "vue";
         </div>
     </div>
     <div class="border border-green rounded-sm p-2">
+        <Time :startStatus="store.startStatus" />
         <router-view/>
     </div>
 </template>
