@@ -49,9 +49,7 @@ export default{
                 title: this.title,
                 category: this.category
             };
-
             this.posts.push(newPost);
-
             // set the form back to blank
             this.newMessage = '';
             this.title = '';
