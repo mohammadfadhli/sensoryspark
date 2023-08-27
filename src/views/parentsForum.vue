@@ -59,16 +59,6 @@ export default{
             this.category = 'General';
         },
 
-        getCategoryClass(category) {
-            const colors = {
-                General: "bg-orange",
-                Childcare: "bg-blue",
-                Homework: "bg-purple",
-                "Parenting Tips": "bg-light-red",
-            };
-            return `rounded-full text-sm px-3 py-1 mb-3 text-white ${colors[category]}`;
-        },
-
         async fetchPosts() {
             const querySnapshot = await getDocs(collection(db, 'messages'));
             
@@ -113,7 +103,7 @@ export default{
                     <option value="General">General</option>
                     <option value="Childcare">Childcare</option>
                     <option value="Homework">Homework</option> 
-                    <option value="Parenting Tips">Parenting Tips</option>
+                    <option value="Parenting">Parenting Tips</option>
                 </select>
             </div>
             <button type="submit" class="bg-orange rounded-corners px-5 py-3 font-bold my-2">Post</button>
@@ -128,9 +118,12 @@ export default{
                 <div class="text-gray-900 font-bold text-xl mb-2">
                     {{ post.title }}
                 </div>
-                <span v-if="post.category" :class="getCategoryClass(post.category)">
-                    {{ post.category }}
-                </span>
+                <div v-if="post.category" 
+                    class="px-5 py-1 mb-3 rounded-lg w-16 flex items-center justify-center text-white text-sm"
+                    :class="post.category=='General' ? 'bg-orange' : post.category=='Childcare' ? 'bg-blue px-10' : post.category=='Homework' ? 'bg-purple px-10' : 'bg-light-red px-10'"
+                >
+                    <p>{{ post.category }}</p>
+                </div>
                 <div class="flex items-center">
                     <img class="w-10 h-10 mr-4" src="../assets/user.png" :alt="post.username">
                     <div class="text-sm">
