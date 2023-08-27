@@ -70,7 +70,13 @@ function reloadPage() {
 </style>
 
 <template>
+
+<h1 class="font-bold text-5xl text-orange text-center my-5">Let's learn Math!</h1>
+
     <div class="container mx-auto flex items-center justify-content-center">
+
+        
+
         <div class="container max-w-[1024px] mx-10 p-3 mt-20">
             <div class="grid grid-cols-5 gap-1">
                 <div>
