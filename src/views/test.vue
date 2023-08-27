@@ -74,6 +74,30 @@ const posts = usePosts(); // Assuming you have a store module for posts
         </div>
 
     </div>
+
+
+    <!--card-->
+    <div class="container max-w-[1024px] mx-auto p-4">
+        <div class="bg-fff584 border-2 border-d5cb6f rounded-corners p-4 flex flex-col justify-between leading-normal">
+            <div class="text-gray-900 font-bold text-xl mb-2">
+                Title
+            </div>
+            <div class="flex items-center">
+                <img class="w-10 h-10 mr-4" src="../assets/user.png" alt="Name of user">
+                <div class="text-sm">
+                    <p class="text-gray-900 leading-none">
+                        Name of user
+                    </p>
+                    <p class="text-gray-600">
+                        Post date
+                    </p>
+                </div>
+            </div>
+            <div class= "text-base pt-2">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+            </div>
+        </div>
+    </div>
 </template>
 
 
