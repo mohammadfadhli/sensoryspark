@@ -81,7 +81,9 @@ export default{
 </script>
 
 <template>
-    {{fetchPosts()}}
+    <span style="display:none">
+        {{fetchPosts()}}
+    </span>
     <div class="container max-w-[1024px] mx-auto p-4">
         <h1 class="text-2xl font-semibold mb-3">Create post</h1>
         
