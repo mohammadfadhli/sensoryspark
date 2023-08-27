@@ -1,15 +1,14 @@
 [ 
     "circle",
-    "decagon",
+    "cone",
     "heptagon",
     "hexagon",
+    "kite",
     "nonagon",
     "octagon",
-    "pentagon",
-    "rhombus",
-    "triangle",
     "semicircle",
     "square",
+    "star",
     "trapezium",
     "triangle"
 ]

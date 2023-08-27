@@ -37,30 +37,31 @@ export default {
 
 <script setup>
 import circle from '@/assets/shapes/circle.png';
-import decagon from '@/assets/shapes/decagon.png';
+import cone from '@/assets/shapes/cone.png';
 import heptagon from '@/assets/shapes/heptagon.png';
 import hexagon from '@/assets/shapes/hexagon.png';
+import kite from '@/assets/shapes/kite.png';
 import nonagon from '@/assets/shapes/nonagon.png';
 import octagon from '@/assets/shapes/octagon.png';
-import pentagon from '@/assets/shapes/pentagon.png';
-import rhombus from '@/assets/shapes/rhombus.png';
 import semicircle from '@/assets/shapes/semicircle.png';
 import square from '@/assets/shapes/square.png';
+import star from '@/assets/shapes/star.png';
 import trapezium from '@/assets/shapes/trapezium.png';
 import triangle from '@/assets/shapes/triangle.png';
 
-const shapes = {
-    circle: circle,
-    decagon: decagon,
-    heptagon: heptagon,
-    hexagon: hexagon,
-    nonagon: nonagon,
-    octagon: octagon,
-    pentagon: pentagon,
-    semicircle: semicircle,
-    square: square,
+const shapes = { 
+    circle : circle,
+    cone : cone,
+    heptagon : heptagon,
+    hexagon : hexagon,
+    kite : kite,
+    nonagon : nonagon,
+    octagon : octagon,
+    semicircle : semicircle,
+    square : square,
+    star : star,
     trapezium: trapezium,
-    triangle: triangle,
+    triangle : triangle
 }
 </script>
 
@@ -70,7 +71,7 @@ const shapes = {
         @click="selectCard"
     >
         <p>{{ value }}</p>
-        <img v-if="visible" :src="`${shapes[value]}`"/>
+        <img v-if="visible" class="md:w-12 md:h-12 lg:w-24 lg:h-24" :src="`${shapes[value]}`"/>
         <img v-else class="md:w-16 md:h-16 lg:w-28 lg:h-28" src="@/assets/backmonster.png">
     </div>
 </template>
