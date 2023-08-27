@@ -43,7 +43,7 @@ const handleSignOut = () => {
             <div class="flex items-center md:order-2">
                 <button
                     type="button"
-                    class="flex mr-3 text-sm bg-transparent rounded-full md:mr-0 focus:ring-4 focus:ring-orange-25 px-4 py-1"
+                    class="flex mr-3 text-sm bg-transparent rounded-full md:mr-0 px-4 py-1"
                     id="user-menu-button"
                     aria-expanded="false"
                     data-dropdown-toggle="user-dropdown"
