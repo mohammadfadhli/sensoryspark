@@ -7,12 +7,14 @@ export default{
     data(){
         return {
             newMessage: '',
-            category: 'General'
+            category: 'General',
+            title: '',
+            posts: [],
         };
     },
     methods: {
         submitMessage(){
-            if (this.newMessage != '') {
+            if (this.newMessage != '' && this.title != '') {
                 const auth = getAuth(); 
                 const user = auth.currentUser;
                 // console.log(user.displayName);
@@ -20,7 +22,8 @@ export default{
                     username: user.displayName,
                     datetime: new Date(),
                     message: this.newMessage,
-                    category: this.category
+                    category: this.category,
+                    title: this.title
                 };
                 this.createPost();
                 try {
@@ -31,45 +34,27 @@ export default{
                 }
             }
             else {
-                alert("Please enter a message");
+                alert("Please enter both a title and a message");
             }
         },
 
         createPost(){
-            const auth = getAuth(); 
+            const auth = getAuth();
             const user = auth.currentUser;
-            
             const currentDate = new Date();
-            
-            const newPostHTML = `
-                <div class="container max-w-[1024px] mx-auto p-4">
-                    <div class="bg-fff584 border-2 border-d5cb6f rounded-corners p-4 flex flex-col justify-between leading-normal">
-                        <div class="text-gray-900 font-bold text-xl mb-2">
-                            Title
-                        </div>
-                        <div class="flex items-center">
-                            <img class="w-10 h-10 rounded-full mr-4" src="../assets/mascot.png" alt="${user.displayName}">
-                            <div class="text-sm">
-                                <p class="text-gray-900 leading-none">
-                                    ${user.displayName}
-                                </p>
-                                <p class="text-gray-600">
-                                    ${currentDate}
-                                </p>
-                            </div>
-                        </div>
-                        <div class= "text-base pt-2">
-                            ${this.newMessage}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Add the new post HTML at the beginning of the 'newPost' div
-            document.getElementById('newPost').innerHTML = newPostHTML + document.getElementById('newPost').innerHTML;
-            
+
+            const newPost = {
+                username: user.displayName,
+                datetime: currentDate,
+                message: this.newMessage,
+                title: this.title
+            };
+
+            this.posts.unshift(newPost);
+
             // set the form back to blank
             this.newMessage = '';
+            this.title = '';
             this.category = 'General';
         },
     }
@@ -79,17 +64,20 @@ export default{
 <template>
     
     <div class="container max-w-[1024px] mx-auto p-4">
-        <h1 class="text-2xl font-semibold mb-4">Forum</h1>
+        <h1 class="text-2xl font-semibold mb-3">Create post</h1>
         
         <!-- Create a form for adding new posts -->
         <form @submit.prevent="submitMessage" class="mb-4">
+            <div>
+                <input v-model="title" id="postTitle" placeholder="Title" class="mt-2 border-dashed border-2 border-orange rounded w-full p-2 px-5 bg-orange-25 focus:outline-none focus:ring-0 bg-white">
+            </div>
             <div class="mb-2">
                 <!-- <label for="postText" class="block font-medium">Post Content:</label> -->
                 <textarea v-model="newMessage" id="postText" placeholder="Share your thoughts!" class="mt-2 border-dashed border-2 border-orange rounded w-full p-2 px-5 bg-orange-25 focus:outline-none focus:ring-0 bg-white"></textarea>
             </div>
-            <div class="mb-2">
-                <label for="postCategory" class="block font-medium">Category:</label>
-                <select v-model="category" id="postCategory" class="w-full p-2 px-5 border-dashed border-2 border-orange rounded">
+            <div class="mb-2 flex items-center">
+                <label for="postCategory" class="block font-medium mr-2">Category:</label>
+                <select v-model="category" id="postCategory" class="p-2 px-5 border-dashed border-2 border-orange rounded">
                     <option value="General">General</option>
                     <option value="Childcare">Childcare</option>
                     <option value="Homework">Homework</option> 
@@ -100,8 +88,32 @@ export default{
         </form>
     </div>
 
+    <h1 class="text-2xl font-semibold container max-w-[1024px] mx-auto p-4">Posts</h1>
+
     <div id='newPost'>
+        <div v-for="(post, index) in posts" :key="index" class="container max-w-[1024px] mx-auto p-4">
+            <div class="bg-fff584 border-2 border-d5cb6f rounded-corners p-4 flex flex-col justify-between leading-normal">
+                <div class="text-gray-900 font-bold text-xl mb-2">
+                    {{ post.title }}
+                </div>
+                <div class="flex items-center">
+                    <img class="w-10 h-10 rounded-full mr-4" src="../assets/user.png" :alt="post.username">
+                    <div class="text-sm">
+                        <p class="text-gray-900 leading-none">
+                            {{ post.username }}
+                        </p>
+                        <p class="text-gray-600">
+                            {{ post.datetime }}
+                        </p>
+                    </div>
+                </div>
+                <div class= "text-base pt-2">
+                    {{ post.message }}
+                </div>
+            </div>
+        </div>
     </div>
+
 
 <!--card-->
     <div class="container max-w-[1024px] mx-auto p-4">
@@ -110,7 +122,7 @@ export default{
                 Title
             </div>
             <div class="flex items-center">
-                <img class="w-10 h-10 rounded-full mr-4" src="../assets/mascot.png" alt="Name of user">
+                <img class="w-10 h-10 rounded-full mr-4" src="../assets/user.png" alt="Name of user">
                 <div class="text-sm">
                     <p class="text-gray-900 leading-none">
                         Name of user
