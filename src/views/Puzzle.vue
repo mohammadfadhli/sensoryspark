@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { watch } from "vue";
 import Time from "@/components/Time.vue";
 import Card from "@/components/Card.vue";
 import { useTimeStore } from "@/stores/useTimeStore";

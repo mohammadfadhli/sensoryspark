@@ -64,13 +64,8 @@ export default {
     clockRunning() {
       var currentTime = new Date(),
         timeElapsed = new Date(currentTime - this.timeBegan - this.stoppedDuration),
-        // hour = timeElapsed.getUTCHours(),
         min = timeElapsed.getUTCMinutes(),
         sec = timeElapsed.getUTCSeconds()
-        // ms = timeElapsed.getUTCMilliseconds();
-
-        // this.zeroPrefix(hour, 2)
-        // this.zeroPrefix(ms, 3);
 
       this.time = `${this.zeroPrefix(min, 2)}:${this.zeroPrefix(sec, 2)}`
     },
