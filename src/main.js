@@ -1,10 +1,10 @@
 import "./assets/main.css";
 
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import { auth } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
+import { createPinia } from "pinia";
+import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
+import { auth } from '../firebaseConfig';
 import App from "./App.vue";
 
 const routes = [

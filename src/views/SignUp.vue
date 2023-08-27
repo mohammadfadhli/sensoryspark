@@ -1,7 +1,7 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
-import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { RouterLink } from "vue-router";
+import { auth } from "../../firebaseConfig";
 
 export default {
     data() {

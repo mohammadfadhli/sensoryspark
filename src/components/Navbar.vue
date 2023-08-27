@@ -1,10 +1,9 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { signOut } from "firebase/auth";
 import { initFlowbite } from "flowbite";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onMounted, ref } from "vue";
 import { auth } from "../../firebaseConfig";
 
-const isLoggedIn = ref("");
 const username = ref(localStorage.getItem("username"));
 const email = ref(localStorage.getItem("email"));
 
