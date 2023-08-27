@@ -22,5 +22,7 @@
 
 <template>
   <Navbar v-if="!(['login','signUp'].includes($route.name))"/>
-  <RouterView />
+  <div class="m-10">
+    <RouterView />
+  </div>
 </template>
