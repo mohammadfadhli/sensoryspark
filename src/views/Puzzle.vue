@@ -11,6 +11,7 @@ const cardstore = useCardStore();
 const isActive = ref(false);
 
 const flipCard = payload => {
+    console.log(payload)
   if (cardstore.userCanFlipCard) {
     cardstore.cardList[payload.indexCard].visible = true;
 

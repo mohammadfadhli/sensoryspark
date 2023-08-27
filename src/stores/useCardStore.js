@@ -24,7 +24,7 @@ export const useCardStore = defineStore("CardStore", () => {
 
   const Gamestatus = computed(() => {
     if (remainingPairs.value === 0) {
-      return "congratulations, you won!";
+      return "Congratulations, you won!";
     } else {
       return `Remaining Pairs: ${remainingPairs.value}`;
     }

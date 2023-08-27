@@ -1,41 +1,6 @@
-<script>
-export default {
-    props: {
-        indexCard: {
-            type: Number,
-            required: true
-        },
-        value :{
-            type: String,
-            required: true
-        },
-        visible: {
-            type: Boolean,
-            default: false
-        },
-        matched: {
-            type: Boolean,
-            default: false
-        }
-    },
-
-    setup(props, context) {
-        const selectCard = () => {
-            context.emit("select-card", {
-                indexCard: props.indexCard,
-                faceValue: props.value
-            })
-        };
-
-        return {
-            selectCard
-        };
-    }
-
-}
-</script>
-
 <script setup>
+import { defineProps, defineEmits } from 'vue';
+
 import circle from '@/assets/shapes/circle.png';
 import cone from '@/assets/shapes/cone.png';
 import heptagon from '@/assets/shapes/heptagon.png';
@@ -48,6 +13,34 @@ import square from '@/assets/shapes/square.png';
 import star from '@/assets/shapes/star.png';
 import trapezium from '@/assets/shapes/trapezium.png';
 import triangle from '@/assets/shapes/triangle.png';
+
+const props = defineProps({
+  indexCard: {
+    type: Number,
+    required: true
+  },
+  value: {
+    type: String,
+    required: true
+  },
+  visible: {
+    type: Boolean,
+    default: false
+  },
+  matched: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const emits = defineEmits(["select-card"]);
+
+const selectCard = () => {
+    emits("select-card", {
+        indexCard: props.indexCard,
+        faceValue: props.value
+    });
+};
 
 const shapes = { 
     circle : circle,
@@ -70,8 +63,12 @@ const shapes = {
         :class="visible ? 'bg-yellow border border-green w-full h-full rotate-y-180 absolute rounded-lg' : 'bg-orange w-full h-full rounded-lg'"
         @click="selectCard"
     >
-        <p>{{ value }}</p>
-        <img v-if="visible" class="md:w-12 md:h-12 lg:w-24 lg:h-24" :src="`${shapes[value]}`"/>
-        <img v-else class="md:w-16 md:h-16 lg:w-28 lg:h-28" src="@/assets/backmonster.png">
+        <div v-if="visible">
+            <p>{{ value }}</p>
+            <img class="mx-auto md:w-12 md:h-12 lg:w-24 lg:h-24" :src="`${shapes[value]}`"/>
+        </div>
+        <div v-else>
+            <img class="mx-auto md:w-16 md:h-16 lg:w-28 lg:h-28" src="@/assets/backmonster.png">
+        </div>
     </div>
 </template>
