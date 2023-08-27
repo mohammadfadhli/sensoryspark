@@ -118,18 +118,18 @@ export default {
                             {{ error }}
                         </h1>
 
-                        <div class="mt-14 grid grid-cols-2">
+                        <div class="mt-14 grid grid-cols-2 px-3">
                             <div>
                                 <input
                                     type="submit"
                                     value="Sign Up"
                                     @click.prevent="onSubmit"
-                                    class="bg-orange rounded-full px-5 py-3 w-full text-xl cursor-pointer font-bold"
+                                    class="bg-orange rounded-full px-5 py-3 w-full text-xl cursor-pointer font-bold hover:scale-105"
                                 />
                             </div>
 
                             <div class="mx-auto">
-                                <div class="py-3">
+                                <div class="py-3 hover:scale-105">
                                     <!-- <a
                                         href="/"
                                         class="underline text-orange w-full text-xl font-bold"
