@@ -47,7 +47,8 @@ export default{
                 username: user.displayName,
                 datetime: currentDate,
                 message: this.newMessage,
-                title: this.title
+                title: this.title,
+                category: this.category
             };
 
             this.posts.unshift(newPost);
@@ -57,6 +58,37 @@ export default{
             this.title = '';
             this.category = 'General';
         },
+
+        getCategoryClass(category) {
+            const colors = {
+                General: "bg-orange",
+                Childcare: "bg-blue",
+                Homework: "bg-purple",
+                "Parenting Tips": "bg-light-red",
+            };
+            return `rounded-full text-sm px-3 py-1 mb-3 text-white ${colors[category]}`;
+        },
+
+        async fetchPosts() {
+            const querySnapshot = await getDocs(collection(db, 'messages'));
+            
+            this.posts = [];
+            
+            querySnapshot.forEach((doc) => {
+                const post = {
+                    category: doc.data().category,
+                    datetime: doc.data().datetime,
+                    message: doc.data().message,
+                    title: doc.data().title,
+                    username: doc.data().username
+                };
+                
+                this.posts.push(post);
+            });
+        },
+        mounted() {
+            this.fetchPosts(); // Call fetchPosts when the component is mounted
+        }
     }
 }
 </script>
@@ -81,7 +113,7 @@ export default{
                     <option value="General">General</option>
                     <option value="Childcare">Childcare</option>
                     <option value="Homework">Homework</option> 
-                    <option value="Parenting">Parenting Tips</option>
+                    <option value="Parenting Tips">Parenting Tips</option>
                 </select>
             </div>
             <button type="submit" class="bg-orange rounded-corners px-5 py-3 font-bold my-2">Post</button>
@@ -96,8 +128,11 @@ export default{
                 <div class="text-gray-900 font-bold text-xl mb-2">
                     {{ post.title }}
                 </div>
+                <span v-if="post.category" :class="getCategoryClass(post.category)">
+                    {{ post.category }}
+                </span>
                 <div class="flex items-center">
-                    <img class="w-10 h-10 rounded-full mr-4" src="../assets/user.png" :alt="post.username">
+                    <img class="w-10 h-10 mr-4" src="../assets/user.png" :alt="post.username">
                     <div class="text-sm">
                         <p class="text-gray-900 leading-none">
                             {{ post.username }}
@@ -122,7 +157,7 @@ export default{
                 Title
             </div>
             <div class="flex items-center">
-                <img class="w-10 h-10 rounded-full mr-4" src="../assets/user.png" alt="Name of user">
+                <img class="w-10 h-10 mr-4" src="../assets/user.png" alt="Name of user">
                 <div class="text-sm">
                     <p class="text-gray-900 leading-none">
                         Name of user
@@ -152,5 +187,21 @@ export default{
 
 .rounded-corners {
     border-radius: 10px;
+}
+
+.bg-orange {
+    background-color: orange;
+}
+
+.bg-blue {
+    background-color: blue;
+}
+
+.bg-purple {
+    background-color: purple;
+}
+
+.bg-light-red {
+    background-color: lightcoral;
 }
 </style>
