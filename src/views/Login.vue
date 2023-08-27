@@ -1,7 +1,7 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
-import { auth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { RouterLink } from "vue-router";
+import { auth } from "../../firebaseConfig";
 
 export default {
     data() {
@@ -84,18 +84,18 @@ export default {
 
                         <h1 v-if="error" class="text-red-600 font-bold mt-3 text-center">{{ error }}</h1>
 
-                        <div class="mt-14 grid grid-cols-2">
+                        <div class="mt-14 grid grid-cols-2 px-3">
                             <div>
                                 <input
                                     type="submit"
                                     value="Login"
                                     @click.prevent="onSubmit"
-                                    class="bg-orange rounded-full px-5 py-3 w-full text-xl cursor-pointer font-bold"
+                                    class="bg-orange rounded-full px-5 py-3 w-full text-xl cursor-pointer font-bold hover:scale-105"
                                 />
                             </div>
 
                             <div class="mx-auto">
-                                <div class="py-3">
+                                <div class="py-3 hover:scale-105">
                                     <RouterLink
                                         to="/signup"
                                         class="underline text-orange w-full text-xl font-bold"

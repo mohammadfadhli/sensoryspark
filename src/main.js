@@ -1,22 +1,28 @@
 import "./assets/main.css";
 
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import { auth } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
+import { createPinia } from "pinia";
+import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
+import { auth } from '../firebaseConfig';
 import App from "./App.vue";
 
 const routes = [
     { 
         path: "/", 
         name: "login",
-        component: () => import("./views/Login.vue")
+        component: () => import("./views/Login.vue"),
+        meta: {
+            requiresVisitor: true
+        }
     },
     { 
         path: "/signUp", 
         name: "signUp",
-        component: () => import("./views/SignUp.vue") 
+        component: () => import("./views/SignUp.vue"),
+        meta: {
+            requiresVisitor: true
+        }
     },
     {
         path: "/puzzle",
@@ -69,6 +75,15 @@ router.beforeEach(async (to, from, next) => {
         else
         {
             next("/");
+        }
+    }
+    else if (to.matched.some(record => record.meta.requiresVisitor)){
+        if(await getCurrentUser()) {
+            next("/puzzle");
+        }
+        else
+        {
+            next();
         }
     }
     else

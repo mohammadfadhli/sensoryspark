@@ -1,7 +1,7 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
-import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { RouterLink } from "vue-router";
+import { auth } from "../../firebaseConfig";
 
 export default {
     data() {
@@ -72,7 +72,7 @@ export default {
                                 v-model="username"
                                 class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
-                            <h1 class="ms-3 mt-2">provide a unique username</h1>
+                            <h1 class="ms-3 mt-2 italic">provide a unique username</h1>
                         </div>
 
                         <div class="mt-5">
@@ -101,7 +101,7 @@ export default {
                                 v-model="password"
                                 class="mt-2 border-dashed border-2 border-orange rounded-full w-full p-2 bg-orange-25 focus:outline-none"
                             />
-                            <div class="ms-3 mt-2">
+                            <div class="ms-3 mt-2 italic">
                                 <h1>must be at least 8 characters;</h1>
                                 <h1>
                                     must contain uppercase letters, special
@@ -118,18 +118,18 @@ export default {
                             {{ error }}
                         </h1>
 
-                        <div class="mt-14 grid grid-cols-2">
+                        <div class="mt-14 grid grid-cols-2 px-3">
                             <div>
                                 <input
                                     type="submit"
                                     value="Sign Up"
                                     @click.prevent="onSubmit"
-                                    class="bg-orange rounded-full px-5 py-3 w-full text-xl cursor-pointer font-bold"
+                                    class="bg-orange rounded-full px-5 py-3 w-full text-xl cursor-pointer font-bold hover:scale-105"
                                 />
                             </div>
 
                             <div class="mx-auto">
-                                <div class="py-3">
+                                <div class="py-3 hover:scale-105">
                                     <!-- <a
                                         href="/"
                                         class="underline text-orange w-full text-xl font-bold"

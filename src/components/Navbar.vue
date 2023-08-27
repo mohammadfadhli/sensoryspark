@@ -1,10 +1,9 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { signOut } from "firebase/auth";
 import { initFlowbite } from "flowbite";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onMounted, ref } from "vue";
 import { auth } from "../../firebaseConfig";
 
-const isLoggedIn = ref("");
 const username = ref(localStorage.getItem("username"));
 const email = ref(localStorage.getItem("email"));
 
@@ -44,7 +43,7 @@ const handleSignOut = () => {
             <div class="flex items-center md:order-2">
                 <button
                     type="button"
-                    class="flex mr-3 text-sm bg-transparent rounded-full md:mr-0 focus:ring-4 focus:ring-orange-25 px-4 py-1"
+                    class="flex mr-3 text-sm bg-transparent rounded-full md:mr-0 px-4 py-1"
                     id="user-menu-button"
                     aria-expanded="false"
                     data-dropdown-toggle="user-dropdown"
@@ -52,7 +51,7 @@ const handleSignOut = () => {
                 >
                     <span class="sr-only">Open user menu</span>
 
-                    <div class="grid grid-cols-2 gap-1">
+                    <div class="grid grid-cols-2 gap-1 hover:scale-105">
                         <img
                             class="w-10 h-full mx-auto"
                             src="../assets/user.png"
@@ -82,7 +81,7 @@ const handleSignOut = () => {
                         <li>
                             <button
                                 @click.prevent="handleSignOut"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:text-black"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:text-black hover:font-bold"
                             >
                                 Sign out
                             </button>
@@ -124,7 +123,7 @@ const handleSignOut = () => {
                     <li>
                         <a
                             href="/puzzle"
-                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0"
+                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0 hover:scale-105"
                             >Puzzles</a
                         >
                     </li>
@@ -138,14 +137,14 @@ const handleSignOut = () => {
                     <li>
                         <a
                             href="/tutorGPT"
-                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0"
+                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0 hover:scale-105"
                             >TutorGPT</a
                         >
                     </li>
                     <li>
                         <a
                             href="/parentsForum"
-                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0"
+                            class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0 hover:scale-105"
                             >Parents' Forum</a
                         >
                     </li>
