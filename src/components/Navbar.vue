@@ -37,9 +37,6 @@ const handleSignOut = () => {
         <div
             class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
         >
-            <!-- <a href="#" class="flex items-center">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SensorySpark</span>
-            </a> -->
             <div class="flex items-center md:order-2">
                 <button
                     type="button"
@@ -122,24 +119,25 @@ const handleSignOut = () => {
                 >
                     <li>
                         <a
-                            href="/puzzle"
+                            href="/puzzle/easy"
                             class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0 hover:scale-105"
-                            >Puzzles</a
+                            :class="$route.name === 'easy' ? 'text-orange' : ''"
+                            >Puzzle</a
                         >
                     </li>
                     <li>
                         <a
                             href="/math"
                             class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0"
-                            >Maths</a
+                            :class="$route.name === 'math' ? 'text-orange' : ''"
+                            >Math</a
                         >
-                        <a href="/puzzle/easy"
-                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Puzzles</a>
                     </li>
                     <li>
                         <a
                             href="/tutorGPT"
                             class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0 hover:scale-105"
+                            :class="$route.name === 'tutorgpt' ? 'text-orange' : ''"
                             >TutorGPT</a
                         >
                     </li>
@@ -147,6 +145,7 @@ const handleSignOut = () => {
                         <a
                             href="/parentsForum"
                             class="block py-2 pl-3 pr-4 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange md:p-0 hover:scale-105"
+                            :class="$route.name === 'parentsforum' ? 'text-orange' : ''"
                             >Parents' Forum</a
                         >
                     </li>
