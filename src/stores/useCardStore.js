@@ -52,6 +52,17 @@ export const useCardStore = defineStore("CardStore", () => {
       visible: true,
     }));
 
+    const timeoutDuration = computed(() => {
+      const routerName = router.currentRoute.value.name;
+      if (routerName === 'easy') {
+        return 9000; // timeout duration for 'easy' route
+      } else if (routerName === 'medium') {
+        return 7000; // timeout duration for 'medium' route
+      } else {
+        return 5000; // timeout duration for 'hard' route
+      }
+    });
+
     setTimeout(() => {
       cardList.value.forEach(card => {
         card.visible = false;
@@ -61,7 +72,7 @@ export const useCardStore = defineStore("CardStore", () => {
       store.easyStartStatus = constants.TIMER_START;
       store.mediumStartStatus = constants.TIMER_START;
       store.hardStartStatus = constants.TIMER_START;
-    }, 10000);
+    }, timeoutDuration.value);
   };
 
   const populateCardList = () => {
