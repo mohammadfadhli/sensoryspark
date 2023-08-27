@@ -36,6 +36,11 @@ const routes = [
         name: "parentsforum",
         component: () => import("./views/parentsForum.vue"),
     },
+    {
+        path: "/math",
+        name: "math",
+        component: () => import("./views/Math.vue"),
+    }
 ];
 
 const router = createRouter({
