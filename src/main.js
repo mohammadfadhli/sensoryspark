@@ -11,12 +11,18 @@ const routes = [
     { 
         path: "/", 
         name: "login",
-        component: () => import("./views/Login.vue")
+        component: () => import("./views/Login.vue"),
+        meta: {
+            requiresVisitor: true
+        }
     },
     { 
         path: "/signUp", 
         name: "signUp",
-        component: () => import("./views/SignUp.vue") 
+        component: () => import("./views/SignUp.vue"),
+        meta: {
+            requiresVisitor: true
+        }
     },
     {
         path: "/puzzle",
@@ -64,6 +70,15 @@ router.beforeEach(async (to, from, next) => {
         else
         {
             next("/");
+        }
+    }
+    else if (to.matched.some(record => record.meta.requiresVisitor)){
+        if(await getCurrentUser()) {
+            next("/puzzle");
+        }
+        else
+        {
+            next();
         }
     }
     else
