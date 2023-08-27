@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { watch } from "vue";
 import Time from "@/components/Time.vue";
 import Card from "@/components/Card.vue";
 import { useTimeStore } from "@/stores/useTimeStore";
@@ -8,10 +8,7 @@ import { useCardStore } from "@/stores/useCardStore";
 const store = useTimeStore();
 const cardstore = useCardStore();
 
-const isActive = ref(false);
-
 const flipCard = payload => {
-    console.log(payload)
   if (cardstore.userCanFlipCard) {
     cardstore.cardList[payload.indexCard].visible = true;
 
