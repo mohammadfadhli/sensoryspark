@@ -44,7 +44,10 @@ const routes = [
             name: 'hard',
             component: () => import('./components/puzzle/Hard.vue')
           }
-        ]
+        ],
+        meta: {
+            requiresAuth: true,
+        }
     },
     { 
         path: "/tutorgpt", 
@@ -63,6 +66,9 @@ const routes = [
         path: "/math",
         name: "math",
         component: () => import("./views/Math.vue"),
+        meta: {
+            requiresAuth: true,
+        }
     }
 ];
 
