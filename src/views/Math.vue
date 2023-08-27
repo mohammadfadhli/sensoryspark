@@ -103,7 +103,7 @@ function reloadPage() {
                     <div class="flip">
                         <div class="flip-content">
                             <div class="flip-front">
-                                <img src="../assets/Monsters - Head.png" />
+                                <img src="../assets/monstersHead.png" />
                             </div>
                             <div class="flip-back">
                                 <h1 class="text-white text-3xl">{{ correct_result }}</h1>
