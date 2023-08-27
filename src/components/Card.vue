@@ -63,7 +63,7 @@ const shapes = {
         :class="visible ? 'bg-yellow border border-green w-full h-full rotate-y-180 absolute rounded-lg' : 'bg-orange w-full h-full rounded-lg'"
         @click="selectCard"
     >
-        <div v-if="visible" class="py-auto">
+        <div v-if="visible" class="py-auto pb-1">
             <p class="text-xs md:text-base">{{ value }}</p>
             <img class="mx-auto md:w-12 md:h-12 w-8 h-8" :src="`${shapes[value]}`"/>
         </div>
